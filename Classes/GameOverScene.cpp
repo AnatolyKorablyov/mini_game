@@ -6,7 +6,7 @@ USING_NS_CC;
 
 using namespace cocostudio::timeline;
 
-Scene* GameOverScene::createScene()
+Scene* GameOverScene::createScene(unsigned score)
 {
     auto scene = Scene::create();
     auto layer = GameOverScene::create();

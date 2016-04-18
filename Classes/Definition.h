@@ -2,19 +2,12 @@
 
 #include "cocos2d.h"
 
-#define DISPLAY_TIME_SPLASH_SCENE 2
-#define TRANSITION_TIME 0.5
-#define PIPE_SPAWN_FREQUENCY 1.5
-#define PIPE_GAP 10
+static const float DISPLAY_TIME_SPLASH_SCENE = 2.0f;
+static const float TRANSITION_TIME = 1.5f;
+static const float SLOW_CAR_SPAWN_FREQUENCY =  1.5f;
+static const float BONUS_SPAWN_FREQUENCY  = 3.0f;
+static const unsigned SCORE_INCREMENT = 100;
 
-#define UPPER_SCREEN_PIPE_THRESHOLD 0.90
-#define LOWER_SCREEN_PIPE_THRESHOLD 0.1
-#define PIPE_MOVEMENT_SPEED 0.01
+static const float GAS_MILEAGE = 0.2f;
 
-
-#define PLAYER_CAR_COLLISION_BITMASK 0x000001
-#define SLOW_CAR_BONUS_CONTACT_BITMASK 	0x000004
-#define SLOW_CAR_CONTACT_BITMASK 0x000003
-#define OBSTACLE_COLLISION_BITMASK 0x000002
-
-const int BIRD_COLLISION_BITMASK = 1;
+const unsigned C_BOMBS_COUNT = 3;

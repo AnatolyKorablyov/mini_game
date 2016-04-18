@@ -1,8 +1,6 @@
 #pragma once
 #include "cocos2d.h"
-#include "SlowDriver.h"
-#include "PlayerCar.h"
-#include "ButtonGame.h"
+#include "SimpleAudioEngine.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -16,24 +14,34 @@ private:
 	{
 		sceneWorld = world;
 	};
-	void SpawnPipe(float dt);
+	void SpawnSlowCar(float dt);
+	void SpawnGasoline(float dt);
 
-	//void ControlPlayer(const std::string & nameObject);
-	bool onContactBegin(cocos2d::PhysicsContact &contact);
-	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
-	void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
-	void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
-	void CreateStaticElements(cocos2d::Vec2 const &origin, cocos2d::Size const &visibleSize);
-	void CreateActiveElements(cocos2d::Vec2 const &origin, cocos2d::Size const &visibleSize);
+	void InitBackground();
+	void InitPhysics();
+	void InitTouch();
+	void InitPlayer();
+	void InitLabel();
+
+	void DecrementGasoline(float dt);
 	void GoToGameOverScene();
-private:
+	void RemoveBonus();
 
-	cocos2d::Sprite *m_backgroundSprite;
+	bool OnCollision(cocos2d::PhysicsContact& contact);
+	bool onTouchBeg(cocos2d::Touch* touch, cocos2d::Event* event);
+	void SetPhysicsBodyBox(cocos2d::Sprite* sprite);
+	void SetPhysicsBodyCircle(cocos2d::Sprite* sprite);
+	void onTouchMov(cocos2d::Touch* touch, cocos2d::Event* event);
+	void MovePlayerIfPossible(float newX);
+private:
 	cocos2d::PhysicsWorld *sceneWorld;
-	SlowDriver m_slowDriver;
-	PlayerCar* m_playerCar;
-	CActiveObject *m_leftButton;
-	CActiveObject *m_rightButton;
-	std::unordered_map<int, cocos2d::Node*> m_mouses;
-	cocos2d::Label *m_pScoresLabel;
+	cocos2d::Sprite* m_playerSpr;
+	cocos2d::Size m_visibleSize;
+	cocos2d::Vec2 m_origin;
+	cocos2d::Vector<cocos2d::Sprite*> m_slowCar;
+	cocos2d::Vector<cocos2d::Sprite*> m_bonusGasoline;
+	cocos2d::Label * m_scoreLabel;
+	cocos2d::Label * m_gasolineLabel;
+	float m_gasoline = 10.0f;
+	unsigned m_score = 0;
 };
